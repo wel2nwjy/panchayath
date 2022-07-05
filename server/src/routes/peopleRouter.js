@@ -23,20 +23,21 @@ function verifyToken(req,res,next){
 //============================================
 
 //Insert
-peopleRouter.post("/",verifyToken,async (req, res) => {
+peopleRouter.post("/",async (req, res) => {
     const personNew = new Person(req.body);    
     try {
       const savePerson = await personNew.save();
+      res.status(200).json(savePerson);
        //verify token
-    jwt.verify(req.token,'panchayathManullor',(err)=>{  
-      if(err){  
-          res.sendStatus(403);  
-      }else{
+    // jwt.verify(req.token,'panchayathManullor',(err)=>{  
+    //   if(err){  
+    //       res.sendStatus(403);  
+    //   }else{
+    //     console.log(savePerson)
+        
+    //   }  
 
-        res.status(200).json(savePerson);
-      }  
-
-     }); 
+    //  }); 
      
     } catch (err) {
         console.log("err");
@@ -66,16 +67,17 @@ peopleRouter.get("/:skipValue/:limitValue",verifyToken,async (req, res) => {
       വാർഡിൻ്റെ_പേര്:1,മേൽവിലാസം:1,ഫോൺ_നമ്പർ:1,റേഷൻ_കാർഡ്:1})
     .skip(tempValueSkp).limit(tempValueLmt);
 
-   
+    res.status(200).json(persons);
+    
     //verify token
-    jwt.verify(req.token,'panchayathManullor',(err)=>{  
-      if(err){  
-          res.sendStatus(403);  
-      }else{
+    // jwt.verify(req.token,'panchayathManullor',(err)=>{  
+    //   if(err){  
+    //       res.sendStatus(403);  
+    //   }else{
 
-        res.status(200).json(persons);
-      }  
-     }); 
+    //     res.status(200).json(persons);
+    //   }  
+    //  }); 
   
   } catch (err) {
     res.status(500).json(err);

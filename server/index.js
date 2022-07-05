@@ -1,5 +1,6 @@
 const express=require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv")
 const cors = require("cors");
 const personRouter = require("./src/routes/peopleRouter");
 const downloadRouter = require("./src/routes/downloadRouter")
@@ -11,9 +12,10 @@ const userRoleRouter = require("./src/routes/userRoleRouter")
 const app=express();
 //moment().format('MMMM Do YYYY, h:mm:ss a') 
 
+dotenv.config()
 
 const MONGO_URL =
-  "mongodb+srv://shemy123:ofAkE5fEi2kqwELQ@cluster0.zqkff.mongodb.net/TrialData?retryWrites=true&w=majority";
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zqkff.mongodb.net/TrialData2?retryWrites=true&w=majority`;
   const PORT = process.env.PORT || 5000;
   
    app.use(cors());

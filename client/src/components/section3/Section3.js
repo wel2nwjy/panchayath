@@ -119,7 +119,9 @@ const Section3 = (props) => {
 useEffect(()=>{
   if(isSubmit){
     const AddNewEntry = async()=>{
+
       try {
+        console.log(sendData)
         const response=await auth.post("/people", sendData);
            
         if(response.data){           
